@@ -1,5 +1,7 @@
 package ru.yandex.practicum.catsgram.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.catsgram.User;
 import ru.yandex.practicum.catsgram.exceptions.InvalidEmailException;
@@ -10,9 +12,11 @@ import java.util.*;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    Map<Integer, User> users = new HashMap<>();
+    private final static Logger log = LoggerFactory.getLogger(UserController.class);
+    private static Map<Integer, User> users = new HashMap<>();
     @GetMapping
     public Collection<User> getUsers() {
+        log.debug("Количество пользователей - {}", users.size());
         return users.values();
     }
 
